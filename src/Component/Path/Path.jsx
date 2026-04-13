@@ -1,10 +1,9 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../../Root/Root";
 import Home from "../Home/Home";
-import Register from "../Register/Register";
+import RegisterLoginHome from "../RegisterLogin/RegisterLoginHome/RegisterLoginHome";
 import Login from "../Login/Login";
-import { auth } from "../../Firebase/Firebase.init";
-import Auth from "../Auth/Auth";
+import Register from "../Register/Register";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +13,20 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: RegisterLoginHome,
+    children: [
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
       },
     ],
   },
