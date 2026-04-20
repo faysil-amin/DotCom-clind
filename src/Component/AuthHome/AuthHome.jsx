@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
 
-const RegisterLoginHome = () => {
+const AuthHome = () => {
   return (
     <div>
       <Outlet></Outlet>
@@ -9,4 +9,4 @@ const RegisterLoginHome = () => {
   );
 };
 
-export default RegisterLoginHome;
+export default AuthHome;

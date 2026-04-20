@@ -1,85 +1,114 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../Authorization/AuthContext/AuthContext";
-import loginImage from "../../assets/loginpage.png";
-import boyone from "../../assets/boyone.png";
+import React from "react";
+import dearr from "../../assets/dearr2.jpg";
 import { useForm } from "react-hook-form";
+import { GiChewedHeart } from "react-icons/gi";
+import { Link, useLocation } from "react-router";
+import Container from "../Container/Container";
+import useAuth from "../../Hook/useAuth";
 import axios from "axios";
+import useAxios from "../../Hook/useAxios";
+import Swal from "sweetalert2";
 const Register = () => {
-  const { creatUser } = useContext(AuthContext);
-
+  const normalAxios = useAxios();
+  const { creatUser, updateUser } = useAuth();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const handleRegister = (data) => {
-    const profileImage = data.image[0];
-    creatUser(data.email, data.password).then(() => {
-      const formData = new FormData();
-      formData.append("image", profileImage);
-      const imageKey = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
-      axios.post(imageKey, formData).then((res) => {
-        console.log(res.data.data.url);
-        const imageUrl = res.data.data.res;
-        const userData ={
-          
-        }
+    console.log(data);
+    const imageFile = data.image[0];
+    creatUser(data.email, data.password)
+      .then(() => {
+        const formData = new FormData();
+        formData.append("image", imageFile);
+        const bdKey = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
+        axios.post(bdKey, formData).then((res) => {
+          const userImage = res.data.data.url;
+          const userInfo = {
+            userName: data.name,
+            userEmail: data.email,
+            userImage: userImage,
+          };
+          normalAxios.post("/user", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Register Successfull!",
+                icon: "success",
+                draggable: true,
+              });
+            }
+          });
+          const userUpdateInfo = {
+            displayName: data.name,
+            photoURL: userImage,
+          };
+          updateUser(userUpdateInfo)
+            .then(() => {})
+            .catch(() => {});
+        });
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "User already exist!",
+        });
       });
-    });
   };
   return (
-    <div className="bg-[#dfdef0] relative w-full h-screen flex md:items-center md:justify-center">
-      {/* laptop layout login page*/}
-      <div
-        className=" w-full rounded-xl h-[35%] md:w-[80vw] md:h-[38vw] bg-cover bg-center hidden md:flex justify-center  flex-col"
-        style={{
-          backgroundImage: `url(${loginImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div>
-          <form onSubmit={handleSubmit(handleRegister)}>
-            <div className="card  w-full max-w-sm shrink-0 ml-[8vw]">
-              <div className="card-body">
-                <fieldset className="fieldset">
-                  {/* user full name */}
+    <div className="bg-[#3735421f]">
+      <Container>
+        <div className="h-screen md:overflow-hidden  flex-col-reverse md:flex-row flex items-center justify-between">
+          <div className="card flex-1 shrink-0 py-2">
+            <div className="card-body w-full">
+              <form onSubmit={handleSubmit(handleRegister)}>
+                <fieldset className="fieldset w-full">
+                  <label className="text-center text-xl font-bold text-[#5d527d]">
+                    {" "}
+                    Sing in to Discover
+                    <br />
+                    The Earth!
+                  </label>
+                  {/* name */}
                   <label className="label">Full Name</label>
                   <input
                     type="text"
-                    className="input"
+                    className="input w-full"
                     placeholder="Full Name"
                     {...register("name", { required: true })}
                   />
                   {errors.name?.type === "required" && (
-                    <span className="text-red-500">
-                      pleace enter your name!
-                    </span>
+                    <p className="text-red-500">Enter your full name!</p>
                   )}
-                  {/* user profile image */}
-                  <label className="label">Select Image</label>
+                  {/* image */}
+                  <label className="label">Profile Image</label>
                   <input
-                    {...register("image")}
                     type="file"
-                    className="file-input"
+                    className="file-input w-full"
+                    placeholder="Full Name"
+                    {...register("image", { required: true })}
                   />
-                  {/* user email */}
+                  {errors.image?.type === "required" && (
+                    <p className="text-red-500">Enter your profile image</p>
+                  )}
+                  {/* email */}
                   <label className="label">Email</label>
                   <input
-                    {...register("email", { required: true })}
                     type="email"
-                    className="input"
+                    className="input w-full"
                     placeholder="Email"
+                    {...register("email", { required: true })}
                   />
                   {errors.email?.type === "required" && (
-                    <span className="text-red-500">Enter email!</span>
+                    <p className="text-red-500">Enter your email!</p>
                   )}
-                  {/* user password */}
                   <label className="label">Password</label>
                   <input
                     type="password"
-                    className="input"
+                    className="input w-full"
                     placeholder="Password"
                     {...register("password", {
                       required: true,
@@ -88,9 +117,7 @@ const Register = () => {
                     })}
                   />
                   {errors.password?.type === "required" && (
-                    <p className="text-red-500">
-                      Password is required. Please enter your password.
-                    </p>
+                    <p className="text-red-500">Creat a password!</p>
                   )}
                   {errors.password?.type === "pattern" && (
                     <p className="text-red-500">
@@ -99,48 +126,27 @@ const Register = () => {
                       special character.
                     </p>
                   )}
-                  <button className="btn mt-4 bg-[#5d527d] text-white">
-                    Login
-                  </button>
+                  <p>
+                    Already have an account{" "}
+                    <Link
+                      to={"/login"}
+                      state={location.state}
+                      className="text-blue-500 underline"
+                    >
+                      Log In
+                    </Link>
+                  </p>
+                  <button className="btn btn-neutral mt-4">Register</button>
                 </fieldset>
-              </div>
+              </form>
+              <div></div>
             </div>
-          </form>
+          </div>
+          <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">
+            <img className="md:h-[50%] rounded-xl" src={dearr} alt="" />
+          </div>
         </div>
-      </div>
-      {/* phone layout login page */}
-      <div className="md:hidden">
-        <div>
-          <img src={boyone} className="w-full h-[20%]" alt="" />
-          <form onSubmit={handleSubmit(handleRegister)}>
-            <div className="card   shrink-0 ">
-              <div className="card-body">
-                <fieldset className="fieldset">
-                  <label className="label">Full Name</label>
-                  <input
-                    type="email"
-                    className="input"
-                    placeholder="Full Name"
-                  />
-                  <label className="label">Select Image</label>
-                  <input type="file" className="file-input" />
-                  <label className="label">Email</label>
-                  <input type="email" className="input" placeholder="Email" />
-                  <label className="label">Password</label>
-                  <input
-                    type="password"
-                    className="input"
-                    placeholder="Password"
-                  />
-                  <button className="btn mt-4 bg-[#5d527d] text-white">
-                    Login
-                  </button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+      </Container>
     </div>
   );
 };

@@ -1,7 +1,89 @@
-import { AuthContext } from "../Authorization/AuthContext/AuthContext";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { GiChewedHeart } from "react-icons/gi";
+import { Link, useLocation } from "react-router";
+import Container from "../Container/Container";
+import dearr from "../../assets/dearr2.jpg";
+const Register = () => {
+  const location = useLocation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handleSing = (data) => {
+    console.log(data);
+  };
+  return (
+    <div className="bg-[#3735421f]">
+      <Container>
+        <div className="h-screen md:overflow-hidden  flex-col-reverse md:flex-row flex items-center justify-between">
+          <div className="card flex-1 shrink-0 py-2">
+            <div className="card-body w-full">
+              <form onSubmit={handleSubmit(handleSing)}>
+                <fieldset className="fieldset w-full">
+                  <label className="text-center text-xl font-bold text-[#5d527d]">
+                    {" "}
+                    Sing in to Discover
+                    <br />
+                    The Earth!
+                  </label>
 
-const Login = () => {
-  return <div></div>;
+                  {/* email */}
+                  <label className="label">Email</label>
+                  <input
+                    type="email"
+                    className="input w-full"
+                    placeholder="Email"
+                    {...register("email", { required: true })}
+                  />
+                  {errors.email?.type === "required" && (
+                    <p className="text-red-500">Enter your email!</p>
+                  )}
+                  <label className="label">Password</label>
+                  <input
+                    type="password"
+                    className="input w-full"
+                    placeholder="Password"
+                    {...register("password", {
+                      required: true,
+                      pattern:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/,
+                    })}
+                  />
+                  {errors.password?.type === "required" && (
+                    <p className="text-red-500">Creat a password!</p>
+                  )}
+                  {errors.password?.type === "pattern" && (
+                    <p className="text-red-500">
+                      Password must be at least 6 characters long and include at
+                      least one uppercase letter, one lowercase letter, and one
+                      special character.
+                    </p>
+                  )}
+                  <p>
+                    Already have an account{" "}
+                    <Link
+                      to={"/login"}
+                      state={location.state}
+                      className="text-blue-500 underline"
+                    >
+                      Log In
+                    </Link>
+                  </p>
+                  <button className="btn btn-neutral mt-4">Register</button>
+                </fieldset>
+              </form>
+              <
+            </div>
+          </div>
+          <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">
+            <img className="md:h-[50%] rounded-xl" src={dearr} alt="" />
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
 };
 
-export default Login;
+export default Register;
