@@ -4,15 +4,33 @@ import { GiChewedHeart } from "react-icons/gi";
 import { Link, useLocation } from "react-router";
 import Container from "../Container/Container";
 import dearr from "../../assets/dearr2.jpg";
+import GoogleSing from "../GoogleSing/GoogleSing";
+import useAuth from "../../Hook/useAuth";
+import Swal from "sweetalert2";
 const Register = () => {
   const location = useLocation();
+  const { userSignIn } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const handleSing = (data) => {
-    console.log(data);
+    userSignIn(data.email, data.password)
+      .then(() => {
+        Swal.fire({
+          title: "Login Successfull!",
+          icon: "success",
+          draggable: true,
+        });
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "User already exist!",
+        });
+      });
   };
   return (
     <div className="bg-[#3735421f]">
@@ -24,9 +42,7 @@ const Register = () => {
                 <fieldset className="fieldset w-full">
                   <label className="text-center text-xl font-bold text-[#5d527d]">
                     {" "}
-                    Sing in to Discover
-                    <br />
-                    The Earth!
+                    Sing in to Discover The Earth!
                   </label>
 
                   {/* email */}
@@ -74,7 +90,9 @@ const Register = () => {
                   <button className="btn btn-neutral mt-4">Register</button>
                 </fieldset>
               </form>
-              <
+              <div>
+                <GoogleSing></GoogleSing>
+              </div>
             </div>
           </div>
           <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">

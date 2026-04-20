@@ -8,6 +8,7 @@ import useAuth from "../../Hook/useAuth";
 import axios from "axios";
 import useAxios from "../../Hook/useAxios";
 import Swal from "sweetalert2";
+import GoogleSing from "../GoogleSing/GoogleSing";
 const Register = () => {
   const normalAxios = useAxios();
   const { creatUser, updateUser } = useAuth();
@@ -66,10 +67,9 @@ const Register = () => {
             <div className="card-body w-full">
               <form onSubmit={handleSubmit(handleRegister)}>
                 <fieldset className="fieldset w-full">
-                  <label className="text-center text-xl font-bold text-[#5d527d]">
+                  <label className="text-center text-2xl font-bold text-[#5d527d]">
                     {" "}
                     Sing in to Discover
-                    <br />
                     The Earth!
                   </label>
                   {/* name */}
@@ -139,7 +139,9 @@ const Register = () => {
                   <button className="btn btn-neutral mt-4">Register</button>
                 </fieldset>
               </form>
-              <div></div>
+              <div>
+                <GoogleSing></GoogleSing>
+              </div>
             </div>
           </div>
           <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">

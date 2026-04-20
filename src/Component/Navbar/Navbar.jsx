@@ -2,7 +2,38 @@ import React from "react";
 import Container from "../Container/Container";
 import { Link } from "react-router";
 import { GiChewedHeart } from "react-icons/gi";
+import useAuth from "../../Hook/useAuth";
 const Navbar = () => {
+  const { UserSingOut, user } = useAuth();
+  const handleSingOut = () => {
+    UserSingOut();
+  };
+  const phnLink = (
+    <>
+      <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li>
+        <Link to={"/addlesson"}>Add Lesson</Link>
+      </li>
+      <li>
+        <Link to={"/mylessons"}>My Lessons</Link>
+      </li>
+      <li>
+        <Link to={"/publiclessons"}>Public Lessons</Link>
+      </li>
+      <li>
+        <Link to={"/pricing/upgrade"}>pricing/upgrade </Link>
+      </li>
+      <li>
+        {user ? (
+          <li onClick={() => handleSingOut()}>Sing Out</li>
+        ) : (
+          <Link to={"/login"}>Log In</Link>
+        )}
+      </li>
+    </>
+  );
   const link = (
     <>
       <li className=" relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
@@ -48,7 +79,7 @@ const Navbar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
             >
-              {link}
+              {phnLink}
             </ul>
           </div>
           <a className="md:flex hidden text-2xl font-bold text-[#31315d] ">
@@ -77,16 +108,27 @@ const Navbar = () => {
             </a>
           </div>
           <div className="hidden md:flex items-center gap-4 ">
-            <Link to={"/login"}>
-              <button className=" hover:scale-105 duration-120 rounded-sm border-2 text-[#31315d] border-[#31315d] px-4 py-2">
-                Log In
+            {user ? (
+              <button
+                onClick={() => handleSingOut()}
+                className=" hover:scale-105 duration-120 rounded-sm border-2 text-[#31315d] border-[#31315d] px-4 py-2"
+              >
+                Sing Out
               </button>
-            </Link>
-            <Link to={"/register"}>
-              <button className="hover:scale-105 duration-120 rounded-sm border-2 bg-[#31315d] text-white border-[#31315d] px-4 py-2">
-                Sing In
-              </button>
-            </Link>
+            ) : (
+              <div className="tems-center gap-4 flex">
+                <Link to={"/login"}>
+                  <button className=" hover:scale-105 duration-120 rounded-sm border-2 text-[#31315d] border-[#31315d] px-4 py-2">
+                    Log In
+                  </button>
+                </Link>
+                <Link to={"/register"}>
+                  <button className="hover:scale-105 duration-120 rounded-sm border-2 bg-[#31315d] text-white border-[#31315d] px-4 py-2">
+                    Sing In
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
