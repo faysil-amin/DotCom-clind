@@ -1,12 +1,21 @@
 import React from "react";
 import useAuth from "../../Hook/useAuth";
+import { useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const GoogleSing = () => {
   const { googleSing } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleGoogleLogin = () => {
     googleSing()
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        navigate(location.state || "/");
+        Swal.fire({
+          title: "Login Successfull!",
+          icon: "success",
+          draggable: true,
+        });
       })
       .catch(() => {});
   };

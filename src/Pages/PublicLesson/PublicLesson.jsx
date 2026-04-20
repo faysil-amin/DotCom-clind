@@ -1,7 +1,7 @@
 import React from "react";
 
 const PublicLesson = () => {
-  return <div>public lesson</div>;
+  return <div>publiclessons</div>;
 };
 
 export default PublicLesson;

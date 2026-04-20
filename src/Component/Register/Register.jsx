@@ -2,7 +2,7 @@ import React from "react";
 import dearr from "../../assets/dearr2.jpg";
 import { useForm } from "react-hook-form";
 import { GiChewedHeart } from "react-icons/gi";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Container from "../Container/Container";
 import useAuth from "../../Hook/useAuth";
 import axios from "axios";
@@ -13,6 +13,7 @@ const Register = () => {
   const normalAxios = useAxios();
   const { creatUser, updateUser } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -47,7 +48,9 @@ const Register = () => {
             photoURL: userImage,
           };
           updateUser(userUpdateInfo)
-            .then(() => {})
+            .then(() => {
+              navigate(location.state || "/");
+            })
             .catch(() => {});
         });
       })
@@ -69,8 +72,7 @@ const Register = () => {
                 <fieldset className="fieldset w-full">
                   <label className="text-center text-2xl font-bold text-[#5d527d]">
                     {" "}
-                    Sing in to Discover
-                    The Earth!
+                    Sing in to Discover The Earth!
                   </label>
                   {/* name */}
                   <label className="label">Full Name</label>

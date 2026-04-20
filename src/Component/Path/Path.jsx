@@ -6,7 +6,10 @@ import Loading from "../Loading/Loading";
 import AuthHome from "../AuthHome/AuthHome";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-
+import PriveteRoute from "../PriveteRoute/PriveteRoute";
+import Dashborad from "../../Dashboard/Dashborad";
+import DashboardHome from "../../Pages/DashboardHome/DashboardHome";
+import Addlesson from "../../Pages/Addlesson/Addlesson";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +40,24 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PriveteRoute>
+        <Dashborad></Dashborad>
+      </PriveteRoute>
+    ),
+    children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
+      {
+        path: "addlesson",
+        Component: Addlesson,
       },
     ],
   },

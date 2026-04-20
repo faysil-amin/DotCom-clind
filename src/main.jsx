@@ -4,6 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router/dom";
 import { router } from "./Component/Path/Path.jsx";
 import AuthProvider from "./Component/Authorization/AuthProvider/AuthProvider.jsx";
+import PriveteRoute from "./Component/PriveteRoute/PriveteRoute.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>

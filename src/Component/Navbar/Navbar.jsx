@@ -14,16 +14,13 @@ const Navbar = () => {
         <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <Link to={"/addlesson"}>Add Lesson</Link>
-      </li>
-      <li>
-        <Link to={"/mylessons"}>My Lessons</Link>
-      </li>
-      <li>
         <Link to={"/publiclessons"}>Public Lessons</Link>
       </li>
       <li>
         <Link to={"/pricing/upgrade"}>pricing/upgrade </Link>
+      </li>
+      <li>
+        <Link to={"/dashboard"}>Dashboard</Link>
       </li>
       <li>
         {user ? (
@@ -39,17 +36,15 @@ const Navbar = () => {
       <li className=" relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
         <Link to={"/"}>Home</Link>
       </li>
-      <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
-        <Link to={"/addlesson"}>Add Lesson</Link>
-      </li>
-      <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
-        <Link to={"/mylessons"}>My Lessons</Link>
-      </li>
+
       <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
         <Link to={"/publiclessons"}>Public Lessons</Link>
       </li>
       <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
         <Link to={"/pricing/upgrade"}>pricing/upgrade </Link>
+      </li>
+      <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
+        <Link to={"/dashboard"}>Dashboard</Link>
       </li>
     </>
   );

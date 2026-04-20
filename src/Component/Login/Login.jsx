@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { GiChewedHeart } from "react-icons/gi";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Container from "../Container/Container";
 import dearr from "../../assets/dearr2.jpg";
 import GoogleSing from "../GoogleSing/GoogleSing";
@@ -9,6 +9,7 @@ import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
 const Register = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { userSignIn } = useAuth();
   const {
     register,
@@ -18,6 +19,7 @@ const Register = () => {
   const handleSing = (data) => {
     userSignIn(data.email, data.password)
       .then(() => {
+        navigate(location.state || "/");
         Swal.fire({
           title: "Login Successfull!",
           icon: "success",
