@@ -5,6 +5,7 @@ import { GiChewedHeart } from "react-icons/gi";
 import useAuth from "../../Hook/useAuth";
 const Navbar = () => {
   const { UserSingOut, user } = useAuth();
+  console.log(user);
   const handleSingOut = () => {
     UserSingOut();
   };
@@ -42,9 +43,6 @@ const Navbar = () => {
       </li>
       <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
         <Link to={"/pricing/upgrade"}>pricing/upgrade </Link>
-      </li>
-      <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
-        <Link to={"/dashboard"}>Dashboard</Link>
       </li>
     </>
   );
@@ -104,12 +102,36 @@ const Navbar = () => {
           </div>
           <div className="hidden md:flex items-center gap-4 ">
             {user ? (
-              <button
-                onClick={() => handleSingOut()}
-                className=" hover:scale-105 duration-120 rounded-sm border-2 text-[#31315d] border-[#31315d] px-4 py-2"
-              >
-                Sing Out
-              </button>
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="p-1 border-2 border-[#31315d] rounded-full"
+                >
+                  <img
+                    className="h-[3vw] w-[3vw] rounded-full"
+                    src={user.photoURL}
+                    alt=""
+                  />
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-10 w-[20vw] p-2 shadow-sm"
+                >
+                  <li>
+                    <h1 className="font-semibold">User Name: {user.displayName}</h1>
+                  </li>
+                  <li>
+                    <Link to={"/profile"}>Profile</Link>
+                  </li>
+                  <li>
+                    <Link to={"/dashboard"}>Dashboard</Link>
+                  </li>
+                  <li onClick={() => handleSingOut()}>
+                    <Link>Sing Out</Link>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <div className="tems-center gap-4 flex">
                 <Link to={"/login"}>

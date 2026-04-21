@@ -1,8 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../../Root/Root";
 import Home from "../Home/Home";
-import ErrorPage from "../ErrorPage/ErrorPage";
-import Loading from "../Loading/Loading";
 import AuthHome from "../AuthHome/AuthHome";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
@@ -10,6 +8,8 @@ import PriveteRoute from "../PriveteRoute/PriveteRoute";
 import Dashborad from "../../Dashboard/Dashborad";
 import DashboardHome from "../../Pages/DashboardHome/DashboardHome";
 import Addlesson from "../../Pages/Addlesson/Addlesson";
+import Error from "../../Pages/Loading&error/Error/Error";
+import UserProfile from "../Profile/userProfile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -18,14 +18,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-      },
-      {
-        path: "*",
-        Component: ErrorPage,
-      },
-      {
-        path: "/loading",
-        Component: Loading,
       },
     ],
   },
@@ -40,6 +32,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "*",
+        Component: Error,
+      },
+      {
+        path: "/profile",
+        Component: UserProfile,
       },
     ],
   },
