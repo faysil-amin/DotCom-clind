@@ -10,7 +10,7 @@ const UserProfile = () => {
         <div className="relative mt-[1vw] bg-linear-to-t from-[#d3e8e9] to-[#9ab3b7] w-full h-[25vw] md:h-[15vw] rounded-xl">
           <img
             className="h-[25vw] w-[25vw] md:h-[9vw] md:w-[9vw] rounded-full absolute -bottom-10 md:-bottom-15 left-8 border-4 border-white"
-            src={user.photoURL}
+            src={user?.photoURL}
             alt=""
           />
         </div>

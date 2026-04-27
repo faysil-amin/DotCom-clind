@@ -1,25 +1,29 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useAuth from "../Hook/useAuth";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
 });
+
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { user, UserSingOut } = useAuth();
+
   useEffect(() => {
-    const request = instance.interceptors.response.use((config) => {
-      config.header.Authorization = `Bearer ${user.accessToken}`;
+
+    const requestInterceptor = instance.interceptors.request.use((config) => {
+      if (user?.accessToken) {
+        config.headers.Authorization = `Bearer ${user.accessToken}`;
+      }
       return config;
     });
-    const reject = instance.interceptors.reject.use(
-      (res) => {
-        return res;
-      },
+    const responseInterceptor = instance.interceptors.response.use(
+      (response) => response,
       (error) => {
-        const status = error.status;
+        const status = error?.response?.status;
+
         if (status === 401 || status === 403) {
           UserSingOut()
             .then(() => {
@@ -27,13 +31,17 @@ const useAxiosSecure = () => {
             })
             .catch(() => {});
         }
+
+        return Promise.reject(error);
       },
     );
+
     return () => {
-      instance.interceptors.response.eject(request);
-      instance.interceptors.response.eject(reject);
+      instance.interceptors.request.eject(requestInterceptor);
+      instance.interceptors.response.eject(responseInterceptor);
     };
-  }, [UserSingOut, navigate, user]);
+  }, [user, UserSingOut, navigate]);
+
   return instance;
 };
 

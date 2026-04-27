@@ -17,6 +17,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const handleRegister = (data) => {
@@ -52,6 +53,7 @@ const Register = () => {
               navigate(location.state || "/");
             })
             .catch(() => {});
+          reset();
         });
       })
       .catch(() => {
@@ -62,10 +64,14 @@ const Register = () => {
         });
       });
   };
+
   return (
     <div className="bg-[#3735421f]">
       <Container>
         <div className="h-screen md:overflow-hidden  flex-col-reverse md:flex-row flex items-center justify-between">
+          <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">
+            <img className="md:h-[50%] rounded-4xl" src={dearr} alt="" />
+          </div>
           <div className="card flex-1 shrink-0 py-2">
             <div className="card-body w-full">
               <form onSubmit={handleSubmit(handleRegister)}>
@@ -145,9 +151,6 @@ const Register = () => {
                 <GoogleSing></GoogleSing>
               </div>
             </div>
-          </div>
-          <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">
-            <img className="md:h-[50%] rounded-xl" src={dearr} alt="" />
           </div>
         </div>
       </Container>

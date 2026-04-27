@@ -119,7 +119,7 @@ const Navbar = () => {
                   className="dropdown-content menu bg-base-100 rounded-box z-10 w-[20vw] p-2 shadow-sm"
                 >
                   <li>
-                    <h1 className="font-semibold">User Name: {user.displayName}</h1>
+                    <h1 className="font-semibold">User: {user.displayName}</h1>
                   </li>
                   <li>
                     <Link to={"/profile"}>Profile</Link>

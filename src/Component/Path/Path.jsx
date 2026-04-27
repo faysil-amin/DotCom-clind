@@ -10,6 +10,7 @@ import DashboardHome from "../../Pages/DashboardHome/DashboardHome";
 import Addlesson from "../../Pages/Addlesson/Addlesson";
 import Error from "../../Pages/Loading&error/Error/Error";
 import UserProfile from "../Profile/userProfile";
+import PublicLesson from "../../Pages/PublicLesson/PublicLesson";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "/publiclessons",
+        Component: PublicLesson,
       },
     ],
   },
@@ -38,7 +43,7 @@ export const router = createBrowserRouter([
         Component: Error,
       },
       {
-        path: "/profile",
+        path: "profile",
         Component: UserProfile,
       },
     ],
@@ -58,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "addlesson",
         Component: Addlesson,
+      },
+      {
+        path: "profile",
+        Component: UserProfile,
       },
     ],
   },

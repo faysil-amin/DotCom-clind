@@ -98,7 +98,7 @@ const Register = () => {
             </div>
           </div>
           <div className="hidden md:flex-1 w-full md:h-[80vw]  md:flex items-center justify-center">
-            <img className="md:h-[50%] rounded-xl" src={dearr} alt="" />
+            <img className="md:h-[50%] rounded-4xl" src={dearr} alt="" />
           </div>
         </div>
       </Container>
