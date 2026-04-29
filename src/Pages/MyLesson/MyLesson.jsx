@@ -1,45 +1,70 @@
-import React, { useState } from "react";
-import Container from "../../Component/Container/Container";
 import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
+import Addlesson from "../Addlesson/Addlesson";
 import Loading from "../Loading&error/Loading/Loading";
 import { RiShareForwardLine } from "react-icons/ri";
-import { CiHeart } from "react-icons/ci";
-import { FaBookmark } from "react-icons/fa";
 import {
   FacebookIcon,
   FacebookShareButton,
   LinkedinIcon,
   LinkedinShareButton,
-  XShareButton,
   XIcon,
+  XShareButton,
 } from "react-share";
-const PublicLesson = () => {
+import Swal from "sweetalert2";
+
+const MyLesson = () => {
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
-    refetch,
-    data: lesson = [],
+    data: lessons = [],
     isLoading,
+    refetch,
   } = useQuery({
-    queryKey: ["public Lesson"],
+    queryKey: ["mylesson", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get("/addlesson");
+      const res = await axiosSecure.get(`/addlesson/${user?.email}`);
       return res.data;
     },
   });
-  const handleLike = (res) => {
-    axiosSecure.patch(`/addlesson/${res._id}`);
-    refetch();
+  console.log(lessons);
+  const handleDelete = (res) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed)
+        axiosSecure.delete(`/addlessons/${res._id}`).then((res) => {
+          if (res.status) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+          refetch();
+        });
+    });
   };
-  console.log(lesson);
   return (
-    <div>
-      <Container>
+    <div className="mx-4">
+      <h1 className="text-xl font-bold mt-2 mb-2">
+        Created Lesson: <span className="text-red-500">{lessons.length}</span>
+      </h1>
+
+      <div>
         {isLoading ? (
           <Loading></Loading>
         ) : (
           <div className="grid md:grid-cols-3 gap-4">
-            {lesson.map((res) => (
+            {lessons.map((res) => (
               <div className="card bg-base-100 shadow-sm h-[380px] overflow-hidden">
                 {/* image */}
                 <figure className="h-40">
@@ -69,9 +94,15 @@ const PublicLesson = () => {
                   </p>
 
                   {/* bottom section always same position */}
-                  <div className="card-actions flex items-center justify-center mt-auto">
+                  <div className="card-actions justify-center mt-auto">
                     <div className="badge badge-outline hover:bg-black hover:text-white">
                       Details
+                    </div>
+                    <div
+                      onClick={() => handleDelete(res)}
+                      className="badge badge-outline hover:bg-black hover:text-white"
+                    >
+                      Delete
                     </div>
                     <div className="badge badge-outline hover:text-white hover:bg-black">
                       <div className="dropdown dropdown-top dropdown-center ">
@@ -124,25 +155,15 @@ const PublicLesson = () => {
                         </ul>
                       </div>
                     </div>
-                    <div
-                      onClick={() => handleLike(res)}
-                      className="badge badge-outline hover:bg-black hover:text-white"
-                    >
-                      Love: {res.lesson_like}
-                      <CiHeart />
-                    </div>
-                    <div className="text-xl">
-                      <FaBookmark />
-                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </Container>
+      </div>
     </div>
   );
 };
 
-export default PublicLesson;
+export default MyLesson;

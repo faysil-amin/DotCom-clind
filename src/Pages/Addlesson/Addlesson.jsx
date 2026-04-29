@@ -5,8 +5,10 @@ import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import useAuth from "../../Hook/useAuth";
 const Addlesson = () => {
   const useAxios = useAxiosSecure();
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ const Addlesson = () => {
         lesson_description: data.description,
         lesson_image: imageUrl,
         lesson_like: 0,
+        user_email: user?.email,
       };
       useAxios.post("/addlesson", addListonData).then((res) => {
         if (res.data.insertedId) {

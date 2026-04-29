@@ -4,7 +4,10 @@ import { MdAddBox } from "react-icons/md";
 import { IoHomeOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { GiChewedHeart } from "react-icons/gi";
+import useRole from "../Pages/useRole/useRole";
+import { FaBookOpen } from "react-icons/fa6";
 const Dashborad = () => {
+  const role = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -88,18 +91,37 @@ const Dashborad = () => {
               </Link>
             </li>
             {/* porfile show for phone */}
-            <li>
-              <Link to={"/dashboard/profile"}>
-                <button
-                  className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Profile"
-                >
-                  {/* Settings icon */}
-                  <CgProfile />
-                  <span className="is-drawer-close:hidden">Profile</span>
-                </button>
-              </Link>
-            </li>
+            {role === "user" && (
+              <li>
+                <Link to={"/dashboard/profile"}>
+                  <button
+                    className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Profile"
+                  >
+                    {/* Settings icon */}
+                    <CgProfile />
+                    <span className="is-drawer-close:hidden">Profile</span>
+                  </button>
+                </Link>
+              </li>
+            )}
+            {/* user created post */}
+            {role === "user" && (
+              <li>
+                <Link to={"/dashboard/createdLesson"}>
+                  <button
+                    className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Created Lesson"
+                  >
+                    {/* Settings icon */}
+                    <FaBookOpen />
+                    <span className="is-drawer-close:hidden">
+                      Created Lesson
+                    </span>
+                  </button>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

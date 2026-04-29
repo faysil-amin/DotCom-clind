@@ -11,6 +11,7 @@ import Addlesson from "../../Pages/Addlesson/Addlesson";
 import Error from "../../Pages/Loading&error/Error/Error";
 import UserProfile from "../Profile/userProfile";
 import PublicLesson from "../../Pages/PublicLesson/PublicLesson";
+import MyLesson from "../../Pages/MyLesson/MyLesson";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         Component: UserProfile,
+      },
+      {
+        path: "createdLesson",
+        Component: MyLesson,
       },
     ],
   },

@@ -82,14 +82,14 @@ const Register = () => {
                   <p>
                     Already have an account{" "}
                     <Link
-                      to={"/login"}
+                      to={"/register"}
                       state={location.state}
                       className="text-blue-500 underline"
                     >
-                      Log In
+                      Register
                     </Link>
                   </p>
-                  <button className="btn btn-neutral mt-4">Register</button>
+                  <button className="btn btn-neutral mt-4">Log In</button>
                 </fieldset>
               </form>
               <div>
