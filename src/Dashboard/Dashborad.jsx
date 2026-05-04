@@ -6,6 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { GiChewedHeart } from "react-icons/gi";
 import useRole from "../Pages/useRole/useRole";
 import { FaBookOpen } from "react-icons/fa6";
+import { FaRegSave } from "react-icons/fa";
 const Dashborad = () => {
   const role = useRole();
   return (
@@ -107,20 +108,36 @@ const Dashborad = () => {
             )}
             {/* user created post */}
             {role === "user" && (
-              <li>
-                <Link to={"/dashboard/createdLesson"}>
-                  <button
-                    className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Created Lesson"
-                  >
-                    {/* Settings icon */}
-                    <FaBookOpen />
-                    <span className="is-drawer-close:hidden">
-                      Created Lesson
-                    </span>
-                  </button>
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link to={"/dashboard/createdLesson"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Created Lesson"
+                    >
+                      {/* Settings icon */}
+                      <FaBookOpen />
+                      <span className="is-drawer-close:hidden">
+                        Created Lesson
+                      </span>
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/saveLesson"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="save lesson"
+                    >
+                      {/* Settings icon */}
+                      <FaRegSave />
+                      <span className="is-drawer-close:hidden">
+                        Save lesson
+                      </span>
+                    </button>
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
         </div>

@@ -30,7 +30,7 @@ const Register = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "User already exist!",
+          text: "Try Again!",
         });
       });
   };

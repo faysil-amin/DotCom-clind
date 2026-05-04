@@ -15,6 +15,7 @@ import {
   XIcon,
 } from "react-share";
 import useAuth from "../../Hook/useAuth";
+import Swal from "sweetalert2";
 const PublicLesson = () => {
   const [like, setLike] = useState([]);
   const { user } = useAuth();
@@ -76,6 +77,15 @@ const PublicLesson = () => {
       lesson_title: res.lesson_title,
       user_email: user?.email,
     };
+    axiosSecure.post("/lessonSave", saveObject).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Drag me!",
+          icon: "success",
+          draggable: true,
+        });
+      }
+    });
   };
   return (
     <div>
