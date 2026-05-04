@@ -14,7 +14,10 @@ import {
   XShareButton,
   XIcon,
 } from "react-share";
+import useAuth from "../../Hook/useAuth";
 const PublicLesson = () => {
+  const [like, setLike] = useState([]);
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
     refetch,
@@ -27,11 +30,53 @@ const PublicLesson = () => {
       return res.data;
     },
   });
-  const handleLike = (res) => {
-    axiosSecure.patch(`/addlesson/${res._id}`);
+  const { data: reaction = [], refetch: newRefatch } = useQuery({
+    queryKey: ["userReaction", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/userReaction/${user?.email}`);
+      return res.data;
+    },
+  });
+  console.log(reaction);
+  const handleLike = async (res) => {
+    const id = res._id;
+    const isLike = like[id];
+    const chackLike = isLike ? "dislike" : "like";
+
+    await axiosSecure.patch(`/addlesson/${id}/like`, {
+      like_lesson: chackLike,
+    });
+
+    await axiosSecure.post("/userReaction", {
+      lesson_title: res.lesson_title,
+      islike: chackLike,
+      user_email: user?.email,
+      lessonId: id,
+    });
+
+    await axiosSecure.patch(`/userReaction/${id}/${user?.email}`, {
+      islike: chackLike,
+    });
+
+    setLike((prev) => ({
+      ...prev,
+      [id]: !isLike,
+    }));
+
     refetch();
+    newRefatch();
   };
-  console.log(lesson);
+  const getStatus = (data) => {
+    const found = reaction.find((res) => res.lessonId === data);
+    return found?.islike;
+  };
+  const handlesave = (res) => {
+    const saveObject = {
+      lessonId: res._id,
+      lesson_title: res.lesson_title,
+      user_email: user?.email,
+    };
+  };
   return (
     <div>
       <Container>
@@ -126,12 +171,12 @@ const PublicLesson = () => {
                     </div>
                     <div
                       onClick={() => handleLike(res)}
-                      className="badge badge-outline hover:bg-black hover:text-white"
+                      className={`badge badge-outline ${getStatus(res._id) === "like" ? "text-red-500" : ""}`}
                     >
                       Love: {res.lesson_like}
                       <CiHeart />
                     </div>
-                    <div className="text-xl">
+                    <div onClick={() => handlesave(res)} className={`text-xl`}>
                       <FaBookmark />
                     </div>
                   </div>

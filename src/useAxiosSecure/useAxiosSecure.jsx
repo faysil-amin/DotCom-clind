@@ -10,26 +10,20 @@ const instance = axios.create({
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { user, UserSingOut } = useAuth();
-
   useEffect(() => {
-
     const requestInterceptor = instance.interceptors.request.use((config) => {
-      if (user?.accessToken) {
-        config.headers.Authorization = `Bearer ${user.accessToken}`;
-      }
+      config.headers.Authorization = `Bearer ${user.accessToken}`;
       return config;
     });
     const responseInterceptor = instance.interceptors.response.use(
-      (response) => response,
+      (res) => res,
       (error) => {
-        const status = error?.response?.status;
+        const status = error.response?.status;
 
         if (status === 401 || status === 403) {
-          UserSingOut()
-            .then(() => {
-              navigate("/login");
-            })
-            .catch(() => {});
+          UserSingOut().then(() => {
+            navigate("/login");
+          });
         }
 
         return Promise.reject(error);
