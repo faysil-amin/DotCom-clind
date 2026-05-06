@@ -76,6 +76,10 @@ const PublicLesson = () => {
       lessonId: res._id,
       lesson_title: res.lesson_title,
       user_email: user?.email,
+      createdAt: res.createdAt,
+      lesson_like: res.lesson_like,
+      lesson_save: res.lesson_save,
+      lesson_image: res.lesson_image,
     };
     axiosSecure.post("/lessonSave", saveObject).then((res) => {
       if (res.data.insertedId) {
