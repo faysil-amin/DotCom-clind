@@ -3,153 +3,212 @@ import Container from "../Container/Container";
 import { Link } from "react-router";
 import { GiChewedHeart } from "react-icons/gi";
 import useAuth from "../../Hook/useAuth";
+
 const Navbar = () => {
   const { UserSingOut, user } = useAuth();
-  console.log(user);
+
   const handleSingOut = () => {
     UserSingOut();
   };
+
   const phnLink = (
     <>
       <li>
         <Link to={"/"}>Home</Link>
       </li>
+
       <li>
         <Link to={"/publiclessons"}>Public Lessons</Link>
       </li>
+
       <li>
-        <Link to={"/pricing/upgrade"}>pricing/upgrade </Link>
+        <Link to={"/pricing/upgrade"}>Pricing</Link>
       </li>
-      <li>
-        <Link to={"/dashboard"}>Dashboard</Link>
-      </li>
+
+      {user && (
+        <li>
+          <Link to={"/dashboard"}>Dashboard</Link>
+        </li>
+      )}
+
       <li>
         {user ? (
-          <li onClick={() => handleSingOut()}>Sing Out</li>
+          <button onClick={handleSingOut}>Sign Out</button>
         ) : (
           <Link to={"/login"}>Log In</Link>
         )}
       </li>
     </>
   );
+
   const link = (
     <>
-      <li className=" relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
-        <Link to={"/"}>Home</Link>
+      <li className="relative group">
+        <Link
+          className="text-[#454564] font-medium transition-all duration-300"
+          to={"/"}
+        >
+          Home
+        </Link>
+
+        <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#454564] transition-all duration-300 group-hover:w-full"></span>
       </li>
 
-      <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
-        <Link to={"/publiclessons"}>Public Lessons</Link>
+      <li className="relative group">
+        <Link
+          className="text-[#454564] font-medium transition-all duration-300"
+          to={"/publiclessons"}
+        >
+          Public Lessons
+        </Link>
+
+        <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#454564] transition-all duration-300 group-hover:w-full"></span>
       </li>
-      <li className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#454564] after:transition-all after:duration-300 hover:after:w-full">
-        <Link to={"/pricing/upgrade"}>pricing/upgrade </Link>
+
+      <li className="relative group">
+        <Link
+          className="text-[#454564] font-medium transition-all duration-300"
+          to={"/pricing/upgrade"}
+        >
+          Pricing
+        </Link>
+        <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#454564] transition-all duration-300 group-hover:w-full"></span>
       </li>
     </>
   );
+
   return (
-    <Container>
-      <div className="navbar ">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
-            >
-              {phnLink}
-            </ul>
-          </div>
-          <a className="md:flex hidden text-2xl font-bold text-[#31315d] ">
-            <p className="flex items-center">
-              <span className="text-4xl">
-                <GiChewedHeart />
-              </span>
-              .com
-            </p>
-          </a>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="text-[#454564] flex items-center justify-center gap-4">
-            {link}
-          </ul>
-        </div>
-        <div className="navbar-end">
-          <div>
-            <a className="md:hidden text-2xl font-bold text-[#31315d] ">
-              <p className="flex items-center">
-                <span className="text-4xl">
-                  <GiChewedHeart />
-                </span>
-                .com
-              </p>
-            </a>
-          </div>
-          <div className="hidden md:flex items-center gap-4 ">
-            {user ? (
-              <div className="dropdown dropdown-end">
+    <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+      <Container>
+        <Container>
+          <div className="navbar py-3 px-0">
+            {/* Left */}
+            <div className="navbar-start">
+              {/* Mobile Menu */}
+              <div className="dropdown">
                 <div
                   tabIndex={0}
                   role="button"
-                  className="p-1 border-2 border-[#31315d] rounded-full"
+                  className="btn btn-ghost lg:hidden hover:bg-[#f2f2f7]"
                 >
-                  <img
-                    className="h-[3vw] w-[3vw] rounded-full"
-                    src={user.photoURL}
-                    alt=""
-                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-[#31315d]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                  </svg>
                 </div>
+
                 <ul
-                  tabIndex="-1"
-                  className="dropdown-content menu bg-base-100 rounded-box z-10 w-[20vw] p-2 shadow-sm"
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-4 z-[1] p-4 shadow-2xl bg-white rounded-3xl w-60 border border-gray-100 space-y-1"
                 >
-                  <li>
-                    <h1 className="font-semibold">User: {user.displayName}</h1>
-                  </li>
-                  <li>
-                    <Link to={"/profile"}>Profile</Link>
-                  </li>
-                  <li>
-                    <Link to={"/dashboard"}>Dashboard</Link>
-                  </li>
-                  <li onClick={() => handleSingOut()}>
-                    <Link>Sing Out</Link>
-                  </li>
+                  {phnLink}
                 </ul>
               </div>
-            ) : (
-              <div className="tems-center gap-4 flex">
-                <Link to={"/login"}>
-                  <button className=" hover:scale-105 duration-120 rounded-sm border-2 text-[#31315d] border-[#31315d] px-4 py-2">
-                    Log In
-                  </button>
-                </Link>
-                <Link to={"/register"}>
-                  <button className="hover:scale-105 duration-120 rounded-sm border-2 bg-[#31315d] text-white border-[#31315d] px-4 py-2">
-                    Sing In
-                  </button>
-                </Link>
-              </div>
-            )}
+
+              {/* Logo */}
+              <Link
+                to={"/"}
+                className="flex items-center text-2xl font-black text-[#31315d]"
+              >
+                <span className="text-4xl">
+                  <GiChewedHeart />
+                </span>
+
+                <span>.com</span>
+              </Link>
+            </div>
+
+            {/* Center */}
+            <div className="navbar-center hidden lg:flex">
+              <ul className="flex items-center gap-8">{link}</ul>
+            </div>
+
+            {/* Right */}
+            <div className="navbar-end">
+              {user ? (
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className="cursor-pointer">
+                    <img
+                      className="h-12 w-12 rounded-full border-2 border-[#31315d] object-cover hover:scale-105 transition-all duration-300"
+                      src={user.photoURL}
+                      alt="user"
+                    />
+                  </div>
+
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu bg-white rounded-3xl z-[1] w-72 mt-4 p-4 shadow-2xl border border-gray-100"
+                  >
+                    <div className="pb-3 border-b border-gray-100">
+                      <h1 className="font-bold text-lg text-[#31315d]">
+                        {user.displayName}
+                      </h1>
+
+                      <p className="text-sm text-gray-500 break-all">
+                        {user.email}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 space-y-1">
+                      <li>
+                        <Link
+                          className="rounded-xl hover:bg-[#f5f5ff]"
+                          to={"/profile"}
+                        >
+                          Profile
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link
+                          className="rounded-xl hover:bg-[#f5f5ff]"
+                          to={"/dashboard"}
+                        >
+                          Dashboard
+                        </Link>
+                      </li>
+
+                      <li>
+                        <button
+                          onClick={handleSingOut}
+                          className="rounded-xl text-red-500 hover:bg-red-50"
+                        >
+                          Sign Out
+                        </button>
+                      </li>
+                    </div>
+                  </ul>
+                </div>
+              ) : (
+                <div className="hidden md:flex items-center gap-3">
+                  <Link to={"/login"}>
+                    <button className="px-5 py-2 rounded-2xl border-2 border-[#31315d] text-[#31315d] hover:bg-[#31315d] hover:text-white transition-all duration-300">
+                      Log In
+                    </button>
+                  </Link>
+
+                  <Link to={"/register"}>
+                    <button className="px-5 py-2 rounded-2xl bg-[#31315d] text-white border-2 border-[#31315d] hover:scale-105 transition-all duration-300 shadow-lg">
+                      Sign Up
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
-    </Container>
+        </Container>
+      </Container>
+    </div>
   );
 };
 

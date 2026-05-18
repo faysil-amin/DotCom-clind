@@ -9,10 +9,14 @@ import Dashborad from "../../Dashboard/Dashborad";
 import DashboardHome from "../../Pages/DashboardHome/DashboardHome";
 import Addlesson from "../../Pages/Addlesson/Addlesson";
 import Error from "../../Pages/Loading&error/Error/Error";
-import UserProfile from "../Profile/userProfile";
 import PublicLesson from "../../Pages/PublicLesson/PublicLesson";
 import MyLesson from "../../Pages/MyLesson/MyLesson";
 import DashbordSaveLesson from "../../Pages/DashbordSaveLesson/DashbordSaveLesson";
+import AddLessonToHome from "../../Dashboard/AddLessonToHome/AddLessonToHome";
+import Contact from "../../Pages/Contact/Contact";
+import ContactMassage from "../../Pages/Contact Massage/ContactMassage";
+import NewsLetters from "../../Pages/NewsLetters/NewsLetters";
+import Profile from "../../Pages/Profile/Profile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +29,14 @@ export const router = createBrowserRouter([
       {
         path: "/publiclessons",
         Component: PublicLesson,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
+      },
+      {
+        path: "profile",
+        Component: Profile,
       },
     ],
   },
@@ -43,10 +55,6 @@ export const router = createBrowserRouter([
       {
         path: "*",
         Component: Error,
-      },
-      {
-        path: "profile",
-        Component: UserProfile,
       },
     ],
   },
@@ -67,16 +75,24 @@ export const router = createBrowserRouter([
         Component: Addlesson,
       },
       {
-        path: "profile",
-        Component: UserProfile,
-      },
-      {
         path: "createdLesson",
         Component: MyLesson,
       },
       {
         path: "saveLesson",
         Component: DashbordSaveLesson,
+      },
+      {
+        path: "addlessontohome",
+        Component: AddLessonToHome,
+      },
+      {
+        path: "contactMassage",
+        Component: ContactMassage,
+      },
+      {
+        path: "newsLetters",
+        Component: NewsLetters,
       },
     ],
   },

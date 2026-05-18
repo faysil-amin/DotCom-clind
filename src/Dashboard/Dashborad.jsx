@@ -1,14 +1,15 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
-import { MdAddBox } from "react-icons/md";
+import { MdAddBox, MdAttachEmail, MdLibraryAdd } from "react-icons/md";
 import { IoHomeOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { GiChewedHeart } from "react-icons/gi";
 import useRole from "../Pages/useRole/useRole";
 import { FaBookOpen } from "react-icons/fa6";
-import { FaRegSave } from "react-icons/fa";
+import { FaRegCommentDots, FaRegSave } from "react-icons/fa";
 const Dashborad = () => {
   const role = useRole();
+  console.log(role);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -79,36 +80,35 @@ const Dashborad = () => {
             </li>
 
             {/* List item */}
-            <li>
-              <Link to={"/dashboard/addlesson"}>
-                <button
-                  className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Add Lesson"
-                >
-                  {/* Settings icon */}
-                  <MdAddBox />
-                  <span className="is-drawer-close:hidden">Add Lesson</span>
-                </button>
-              </Link>
-            </li>
             {/* porfile show for phone */}
             {role === "user" && (
-              <li>
-                <Link to={"/dashboard/profile"}>
-                  <button
-                    className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Profile"
-                  >
-                    {/* Settings icon */}
-                    <CgProfile />
-                    <span className="is-drawer-close:hidden">Profile</span>
-                  </button>
-                </Link>
-              </li>
-            )}
-            {/* user created post */}
-            {role === "user" && (
               <>
+                <li>
+                  {/* add lesson */}
+                  <Link to={"/dashboard/addlesson"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Add Lesson"
+                    >
+                      {/* Settings icon */}
+                      <MdAddBox />
+                      <span className="is-drawer-close:hidden">Add Lesson</span>
+                    </button>
+                  </Link>
+                </li>
+                {/* user created post */}
+                <li>
+                  <Link to={"/dashboard/profile"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Profile"
+                    >
+                      {/* Settings icon */}
+                      <CgProfile />
+                      <span className="is-drawer-close:hidden">Profile</span>
+                    </button>
+                  </Link>
+                </li>
                 <li>
                   <Link to={"/dashboard/createdLesson"}>
                     <button
@@ -133,6 +133,52 @@ const Dashborad = () => {
                       <FaRegSave />
                       <span className="is-drawer-close:hidden">
                         Save lesson
+                      </span>
+                    </button>
+                  </Link>
+                </li>
+              </>
+            )}
+            {role === "admin" && (
+              <>
+                <li>
+                  <Link to={"/dashboard/addlessontohome"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Lesson Add to Home"
+                    >
+                      {/* Settings icon */}
+                      <MdLibraryAdd />
+                      <span className="is-drawer-close:hidden">
+                        Lesson Add to Home
+                      </span>
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/contactMassage"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Cliend Massege"
+                    >
+                      {/* Settings icon */}
+                      <FaRegCommentDots />
+                      <span className="is-drawer-close:hidden">
+                        Cliend Massege
+                      </span>
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/newsLetters"}>
+                    <button
+                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Lesson Add to Home"
+                    >
+                      {/* Settings icon */}
+                      <MdAttachEmail />
+                      <span className="is-drawer-close:hidden">
+                        News Letters
                       </span>
                     </button>
                   </Link>
