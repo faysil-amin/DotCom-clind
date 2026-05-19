@@ -17,6 +17,7 @@ import Contact from "../../Pages/Contact/Contact";
 import ContactMassage from "../../Pages/Contact Massage/ContactMassage";
 import NewsLetters from "../../Pages/NewsLetters/NewsLetters";
 import Profile from "../../Pages/Profile/Profile";
+import LessonDetails from "../../Pages/LessonDetails/LessonDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -35,8 +36,12 @@ export const router = createBrowserRouter([
         Component: Contact,
       },
       {
-        path: "profile",
+        path: "/profile",
         Component: Profile,
+      },
+      {
+        path: "/lessonDetails/:id",
+        Component: LessonDetails,
       },
     ],
   },

@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
 import useAxios from "../../Hook/useAxios";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
 
 const PublicLesson = () => {
   const comment = useRef(null);
@@ -195,10 +196,6 @@ const PublicLesson = () => {
               <div className="p-5 flex flex-col flex-1">
                 {/* badges */}
                 <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="px-3 py-1 text-xs rounded-full bg-pink-100 text-pink-600 font-medium">
-                    {new Date(res.createdAt).toLocaleDateString()}
-                  </span>
-
                   <span className="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700 font-medium">
                     {res.lesson_category}
                   </span>
@@ -217,9 +214,11 @@ const PublicLesson = () => {
                 {/* actions */}
                 <div className="mt-auto flex items-center justify-between gap-2 flex-wrap">
                   {/* details */}
-                  <button className="px-3 py-1.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-900 hover:text-white transition">
-                    Details
-                  </button>
+                  <Link to={`/lessonDetails/${res._id}`}>
+                    <button className="px-3 py-1.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-900 hover:text-white transition">
+                      Details
+                    </button>
+                  </Link>
 
                   {/* share */}
                   <div className="dropdown dropdown-top">

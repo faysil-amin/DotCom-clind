@@ -17,6 +17,7 @@ import { FaBookmark, FaRegCommentAlt } from "react-icons/fa";
 import useAxios from "../../../Hook/useAxios";
 import Container from "../../Container/Container";
 import Footer from "../../../Pages/Footer/Footer";
+import { Link } from "react-router";
 
 const HomeLesson = () => {
   const comment = useRef();
@@ -152,9 +153,11 @@ const HomeLesson = () => {
                   {/* actions */}
                   <div className="mt-auto flex items-center justify-between gap-2">
                     {/* details */}
-                    <button className="px-3 py-1.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-900 hover:text-white transition">
-                      Details
-                    </button>
+                    <Link to={`/lessonDetails/${res._id}`}>
+                      <button className="px-3 py-1.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-900 hover:text-white transition">
+                        Details
+                      </button>
+                    </Link>
 
                     {/* share */}
                     <div className="dropdown dropdown-top">
