@@ -18,6 +18,7 @@ import ContactMassage from "../../Pages/Contact Massage/ContactMassage";
 import NewsLetters from "../../Pages/NewsLetters/NewsLetters";
 import Profile from "../../Pages/Profile/Profile";
 import LessonDetails from "../../Pages/LessonDetails/LessonDetails";
+
 export const router = createBrowserRouter([
   {
     path: "/",

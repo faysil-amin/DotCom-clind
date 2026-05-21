@@ -3,6 +3,7 @@ import Container from "../Container/Container";
 import { Link } from "react-router";
 import { GiChewedHeart } from "react-icons/gi";
 import useAuth from "../../Hook/useAuth";
+import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
 
 const Navbar = () => {
   const { UserSingOut, user } = useAuth();
@@ -10,7 +11,15 @@ const Navbar = () => {
   const handleSingOut = () => {
     UserSingOut();
   };
-
+  const axiosSecure = useAxiosSecure();
+  const obj = {
+    user_email: user?.email,
+  };
+  const handlePayment = async () => {
+    const res = await axiosSecure.post("/create-checkout-session", obj);
+    console.log(res.data);
+    window.location.href = res.data.url;
+  };
   const phnLink = (
     <>
       <li>
@@ -66,17 +75,16 @@ const Navbar = () => {
       </li>
 
       <li className="relative group">
-        <Link
+        <button
+          onClick={() => handlePayment()}
           className="text-[#454564] font-medium transition-all duration-300"
-          to={"/pricing/upgrade"}
         >
           Pricing
-        </Link>
+        </button>
         <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#454564] transition-all duration-300 group-hover:w-full"></span>
       </li>
     </>
   );
-
   return (
     <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
       <Container>
