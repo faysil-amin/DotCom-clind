@@ -31,9 +31,8 @@ const Navbar = () => {
       </li>
 
       <li>
-        <Link to={"/pricing/upgrade"}>Pricing</Link>
+        <Link to={"/successFullPayment"}>Pricing</Link>
       </li>
-
       {user && (
         <li>
           <Link to={"/dashboard"}>Dashboard</Link>

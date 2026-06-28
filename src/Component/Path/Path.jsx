@@ -18,6 +18,7 @@ import ContactMassage from "../../Pages/Contact Massage/ContactMassage";
 import NewsLetters from "../../Pages/NewsLetters/NewsLetters";
 import Profile from "../../Pages/Profile/Profile";
 import LessonDetails from "../../Pages/LessonDetails/LessonDetails";
+import SuccessfullPayment from "../../Pages/SuccessfullPayment/SuccessfullPayment";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
         path: "*",
         Component: Error,
       },
+      {
+        path: "/successFullPayment",
+        element: <PriveteRoute><SuccessfullPayment></SuccessfullPayment></PriveteRoute>
+      }
     ],
   },
   {
