@@ -4,10 +4,11 @@ import { Link } from "react-router";
 import { GiChewedHeart } from "react-icons/gi";
 import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
+import useAxios from "../../Hook/useAxios";
 
 const Navbar = () => {
   const { UserSingOut, user } = useAuth();
-
+  const axios = useAxios()
   const handleSingOut = () => {
     UserSingOut();
   };
@@ -15,11 +16,12 @@ const Navbar = () => {
   const obj = {
     user_email: user?.email,
   };
+
   const handlePayment = async () => {
-    const res = await axiosSecure.post("/create-checkout-session", obj);
-    console.log(res.data);
-    window.location.href = res.data.url;
-  };
+    const url = await axiosSecure.post("/create-checkout-session", obj);
+    console.log(url.data.url)
+    window.location.href = url.data.url;
+  }
   const phnLink = (
     <>
       <li>
@@ -30,8 +32,8 @@ const Navbar = () => {
         <Link to={"/publiclessons"}>Public Lessons</Link>
       </li>
 
-      <li>
-        <Link to={"/successFullPayment"}>Pricing</Link>
+      <li onclick={() => handlePayment()}>
+        Pricing
       </li>
       {user && (
         <li>

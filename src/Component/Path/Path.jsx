@@ -18,7 +18,8 @@ import ContactMassage from "../../Pages/Contact Massage/ContactMassage";
 import NewsLetters from "../../Pages/NewsLetters/NewsLetters";
 import Profile from "../../Pages/Profile/Profile";
 import LessonDetails from "../../Pages/LessonDetails/LessonDetails";
-import SuccessfullPayment from "../../Pages/SuccessfullPayment/SuccessfullPayment";
+import PaymentSuccessFull from "../PaymentPages/PaymentSuccessFull";
+import PaymentCancle from "../PaymentPages/PaymentCancle";
 
 export const router = createBrowserRouter([
   {
@@ -65,7 +66,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/successFullPayment",
-        element: <PriveteRoute><SuccessfullPayment></SuccessfullPayment></PriveteRoute>
+        Component: PaymentSuccessFull,
+      },
+      {
+        path: "/paymentCancle",
+        Component: PaymentCancle,
       }
     ],
   },
