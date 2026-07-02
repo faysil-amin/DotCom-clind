@@ -18,6 +18,7 @@ import useAxios from "../../../Hook/useAxios";
 import Container from "../../Container/Container";
 import Footer from "../../../Pages/Footer/Footer";
 import { Link } from "react-router";
+import WeeklyPopulerLesson from "../../WeeklyPopulerLesson/WeeklyPopulerLesson";
 
 const HomeLesson = () => {
   const comment = useRef();
@@ -197,11 +198,10 @@ const HomeLesson = () => {
                     {/* like */}
                     <button
                       onClick={() => handleLike(res)}
-                      className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border transition ${
-                        getStatus(res._id) === "like"
-                          ? "bg-red-50 text-red-500 border-red-200"
-                          : "border-gray-300 hover:bg-red-50 hover:text-red-500"
-                      }`}
+                      className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border transition ${getStatus(res._id) === "like"
+                        ? "bg-red-50 text-red-500 border-red-200"
+                        : "border-gray-300 hover:bg-red-50 hover:text-red-500"
+                        }`}
                     >
                       <CiHeart /> {res.lesson_like}
                     </button>
@@ -225,7 +225,9 @@ const HomeLesson = () => {
               </div>
             ))}
         </div>
+        <WeeklyPopulerLesson></WeeklyPopulerLesson>
       </Container>
+
       <Footer></Footer>
       <dialog ref={comment} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box rounded-3xl bg-white p-6 md:p-8">
