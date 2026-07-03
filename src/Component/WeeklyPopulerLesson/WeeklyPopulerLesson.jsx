@@ -51,7 +51,7 @@ const WeeklyPopulerLesson = () => {
                             <img
                                 src={lesson.lesson_image}
                                 alt={lesson.lesson_title}
-                                className="w-full h-50 object-cover group-hover:scale-110 duration-700"
+                                className="w-full h-55 object-cover group-hover:scale-110 duration-700"
                             />
 
                             {/* Gradient */}
@@ -81,34 +81,6 @@ const WeeklyPopulerLesson = () => {
                             <p className="text-gray-600 mt-4 leading-7 line-clamp-3">
                                 {lesson.lesson_description}
                             </p>
-
-                            {/* Stats */}
-                            <div className="grid grid-cols-3 gap-4 mt-3">
-
-                                <div className="bg-slate-100 rounded-2xl py-4 text-center">
-                                    <FaHeart className="mx-auto text-red-500 text-xl mb-2" />
-                                    <h4 className="font-bold text-[#31315d]">
-                                        {lesson.lesson_like}
-                                    </h4>
-                                    <p className="text-xs text-gray-500">Likes</p>
-                                </div>
-
-                                <div className="bg-slate-100 rounded-2xl py-4 text-center">
-                                    <FaBookmark className="mx-auto text-[#31315d] text-xl mb-2" />
-                                    <h4 className="font-bold text-[#31315d]">
-                                        {lesson.lesson_save}
-                                    </h4>
-                                    <p className="text-xs text-gray-500">Saved</p>
-                                </div>
-
-                                <div className="bg-slate-100 rounded-2xl py-4 text-center">
-                                    <FaCalendarAlt className="mx-auto text-[#31315d] text-xl mb-2" />
-                                    <p className="text-xs text-gray-600 px-2">
-                                        {new Date(lesson.createdAt).toLocaleDateString()}
-                                    </p>
-                                </div>
-
-                            </div>
 
                         </div>
                     </div>

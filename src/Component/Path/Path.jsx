@@ -40,7 +40,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        Component: Profile,
+        element: <PriveteRoute>
+          <Profile></Profile>
+        </PriveteRoute>
       },
       {
         path: "/lessonDetails/:id",

@@ -12,9 +12,12 @@ import {
 import { FaGithub, FaLinkedinIn, FaFacebookF } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
+import useRole from "../useRole/useRole";
+import Chart from "./Chart";
 
 const Profile = () => {
   const { user } = useAuth();
+  const role = useRole()
   const axiosSecure = useAxiosSecure();
   const { data: lessonCount = [] } = useQuery({
     queryKey: ["lessonCount", user?.email],
@@ -92,7 +95,15 @@ const Profile = () => {
                       )}
                     </h2>
                   </div>
+                  <div className="bg-gradient-to-r from-green-600 to-emerald-700 rounded-[30px] p-6 shadow-2xl">
+                    <p className="text-white/70 text-sm">Membership</p>
+
+                    <h2 className="text-3xl font-black text-white mt-3">
+                      {role}
+                    </h2>
+                  </div>
                 </div>
+
 
                 {/* About */}
                 <div className="bg-white/5 border border-white/10 rounded-[35px] p-8 backdrop-blur-xl">
@@ -106,9 +117,11 @@ const Profile = () => {
                     premium user experiences.
                   </p>
                 </div>
+                {/* user & lesson growth chart */}
+                <Chart></Chart>
               </div>
               {/* Info */}
-              <div className="w-full mt-8 space-y-4">
+              <div className="w-full mt-8 space-y-4 flex items-center justify-center">
                 <div className="flex items-center gap-3 text-zinc-300 bg-white/5 rounded-2xl px-4 py-3 border border-white/5">
                   <IoLocationOutline className="text-xl text-pink-400" />
                   <span className="text-sm">Chattogram, Bangladesh</span>

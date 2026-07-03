@@ -65,21 +65,7 @@ const Dashborad = () => {
                 </button>
               </Link>
             </li>
-            {/* List item */}
-            <li>
-              <Link to={"/dashboard"}>
-                <button
-                  className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
-                >
-                  {/* Home icon */}
-                  <IoHomeOutline />
-                  <span className="is-drawer-close:hidden">Homepage</span>
-                </button>
-              </Link>
-            </li>
 
-            {/* List item */}
             {/* porfile show for phone */}
             {role === "user" && (
               <>
@@ -93,19 +79,6 @@ const Dashborad = () => {
                       {/* Settings icon */}
                       <MdAddBox />
                       <span className="is-drawer-close:hidden">Add Lesson</span>
-                    </button>
-                  </Link>
-                </li>
-                {/* user created post */}
-                <li>
-                  <Link to={"/dashboard/profile"}>
-                    <button
-                      className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Profile"
-                    >
-                      {/* Settings icon */}
-                      <CgProfile />
-                      <span className="is-drawer-close:hidden">Profile</span>
                     </button>
                   </Link>
                 </li>
@@ -173,7 +146,7 @@ const Dashborad = () => {
                   <Link to={"/dashboard/newsLetters"}>
                     <button
                       className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Lesson Add to Home"
+                      data-tip="News Letters"
                     >
                       {/* Settings icon */}
                       <MdAttachEmail />

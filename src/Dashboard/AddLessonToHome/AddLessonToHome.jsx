@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Container from "../../Component/Container/Container";
 import Loading from "../../Pages/Loading&error/Loading/Loading";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../useAxiosSecure/useAxiosSecure";
+import useAxios from "../../Hook/useAxios";
 
 const AddLessonToHome = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure()
   const {
     data: allLesson = [],
     isLoading,
@@ -18,13 +19,12 @@ const AddLessonToHome = () => {
       return res.data;
     },
   });
-  const handleShow = (res) => {
+  const handleShow = (data) => {
     const checkShow =
-      res.admin_select === "not select" ? "select" : "not select";
-    axiosSecure
-      .patch(`/addlesson/${res._id}/adminSelect`, {
-        selectLesson: checkShow,
-      })
+      data.admin_select === "not select" ? "select" : "not select";
+    axiosSecure.patch(`/addlesson/${data._id}/adminSelect`, {
+      selectLesson: checkShow,
+    })
       .then((res) => {
         if (res.data.modifiedCount) {
           refetch();
