@@ -1,16 +1,21 @@
-# React + Vite
+🌐 Dot Com – A Platform to Share Your Everyday Life Experiences
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dot Com is a web platform where people can easily share their daily life experiences, stories, thoughts, and ideas with others.
 
-Currently, two official plugins are available:
+This project was built using React, Tailwind CSS, Express.js, MongoDB, Firebase Authentication, JWT, and various React Hooks. It also includes secure Stripe integration for Premium Subscription payments.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+✨ Key Features
 
-## React Compiler
+- 📝 Create, edit, and delete posts
+- 🔒 Secure authentication using Firebase Authentication and JWT
+- 💎 Premium Subscription powered by Stripe
+- 👤 User role and two Admin roles
+- 📌 Admins can feature or remove any post from the Home Page (up to 6 featured posts)
+- 📧 Newsletter subscription
+- 🔗 Social media sharing for posts
+- ⚡ Fast, responsive, and user-friendly design
+- 🎯 Many more useful and exciting features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Share your valuable experiences with the community and become a part of Dot Com today!
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🌍 Website Link: [https://assignment-11-a032d.web.app/]
