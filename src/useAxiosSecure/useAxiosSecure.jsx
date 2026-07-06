@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 const instance = axios.create({
   baseURL: "https://dot-com-server.vercel.app",
 });
-
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { user, UserSingOut } = useAuth();
