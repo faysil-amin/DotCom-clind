@@ -118,7 +118,7 @@ const Profile = () => {
                   </p>
                 </div>
                 {/* user & lesson growth chart */}
-                <Chart></Chart>
+                {role === "admin" ? <Chart></Chart> : ""}
               </div>
               {/* Info */}
               <div className="w-full mt-8 space-y-4 flex items-center justify-center">
