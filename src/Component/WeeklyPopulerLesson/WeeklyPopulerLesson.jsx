@@ -18,6 +18,7 @@ const WeeklyPopulerLesson = () => {
             return res.data;
         },
     });
+    console.log("hello", weeklyLessonData)
 
     if (isLoading) {
         return (

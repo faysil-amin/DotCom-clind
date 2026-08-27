@@ -225,7 +225,6 @@ const HomeLesson = () => {
               </div>
             ))}
         </div>
-        <WeeklyPopulerLesson></WeeklyPopulerLesson>
       </Container>
 
       <Footer></Footer>
